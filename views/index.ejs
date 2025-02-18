@@ -4,9 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Currency Converter App</title>
-  
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
+
 <body>
-  
+  <main class="wrapper">
+    <form action="/convert" method="POST">
+      <section class="app-container">
+        <h1 class="title">Currency Converter</h1>
+
+        <div class="input-group">
+          <label for="from-currency" class="from-title">From:</label>
+          <select id="from-currency" class="currency-select" name="from-currency">
+          <% for (let i = 0; i < currency.length; i++) { %>
+              <option value="<%= currency[i] %>" class="currency-option"><%= currency[i] %></option>
+          <% } %>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="to-currency" class="to-title">To:</label>
+          <select id="to-currency" class="currency-select" name="to-currency">
+            <% for (let i = 0; i < currency.length; i++) { %>
+              <option value="<%= currency[i] %>" class="currency-option"><%= currency[i] %></option>
+            <% } %>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="input-amount" class="amount-title">Amount:</label>
+          <input type="number" class="input-amount" id="input-amount" name="amount">
+        </div>
+
+        <div class="convert-btn-container">
+          <button type="submit" class="convert-btn">Convert</button>
+        </div>
+        
+        <div class="result-group">
+          <h2 class="result-title">Result:</h2>
+          <p class="converted-result">
+            <% if (convertedResult) { %>
+                <%= convertedResult %> <%= toCurrency %>
+              <% } else if (error) { %>
+                <%= error %>
+              <% } %>
+            <span id="converted-amount"></span> <span id="converted-currency"> </span>
+          </p>
+        </div>
+        
+      </section>
+    </form>
+  </main>  
 </body>
 </html>

@@ -1,0 +1,111 @@
+:root {
+  --background: #ffffff;
+  --background-container: #F0EBEA;
+  --app-background: whitesmoke;
+  --app-title: #0063D9;
+  --app-fields: hsl(300, 12%, 90%);
+  --app-btn: #01D998;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+body {
+  background-color: var(--background);
+  line-height: 1.5;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+.wrapper {
+  background-color: var(--background-container);
+  height: 100%;
+  width: 65%;
+  display: grid;
+  place-items: center;
+}
+
+.app-container {
+  background-color: var(--background);
+  height: 90vh;
+  aspect-ratio: 9/16;
+  border-radius: 5vh;
+  padding: 4vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;   
+}
+
+.title {
+  color: var(--app-title);
+  font-size: 4.5vh;
+  text-align: center;
+}
+
+label, h2 {
+  font-size: 3vh;
+  display: block;
+  margin-bottom: 1vh;
+}
+
+input, select {
+  background-color: var(--app-fields);
+  height: 5vh;
+  width: 100%;
+  display: block;
+  border: none;
+}
+
+.convert-btn {
+  width: 100%;
+  aspect-ratio: 5.5/1;
+  background-color: var(--app-btn);
+  color: white;
+  font-size: 3vh;
+  border: none;
+  border-radius: 2vh;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.convert-btn:hover {
+  transform: scale(1.05)
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 3vh;
+}
+
+.converted-result {
+  background-color: var(--app-fields);
+  height: 5vh;
+  width: 100%;
+  border: 2px solid var(--app-btn);
+  border-radius: 0.5vh;
+}

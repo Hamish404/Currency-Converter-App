@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Currency Converter App</title>
   <link rel="stylesheet" type="text/css" href="styles/main.css">
+  <script src="https://kit.fontawesome.com/808a9bf7e3.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -17,23 +18,33 @@
           <label for="from-currency" class="from-title">From:</label>
           <select id="from-currency" class="currency-select" name="from-currency">
           <% for (let i = 0; i < currency.length; i++) { %>
-              <option value="<%= currency[i] %>" class="currency-option"><%= currency[i] %></option>
+              <option value="<%= currency[i] %>" class="currency-option"
+              <% if (fromCurrency && fromCurrency === currency[i]) { %> selected <% } %>>
+                <%= currency[i] %>
+              </option>
           <% } %>
           </select>
+        </div>
+
+        <div class="swap-btn-container">
+          <i class="swap-btn fa-solid fa-retweet" style="color: #01D998;"></i>
         </div>
 
         <div class="input-group">
           <label for="to-currency" class="to-title">To:</label>
           <select id="to-currency" class="currency-select" name="to-currency">
             <% for (let i = 0; i < currency.length; i++) { %>
-              <option value="<%= currency[i] %>" class="currency-option"><%= currency[i] %></option>
+              <option value="<%= currency[i] %>" class="currency-option"
+                <% if (toCurrency && toCurrency === currency[i]) { %> selected <% } %>>
+                <%= currency[i] %>
+              </option>
             <% } %>
           </select>
         </div>
 
         <div class="input-group">
           <label for="input-amount" class="amount-title">Amount:</label>
-          <input type="number" class="input-amount" id="input-amount" name="amount">
+          <input type="number" class="input-amount" id="input-amount" name="amount" placeholder="0.00" value="<%= amount ? amount : ' ' %>">
         </div>
 
         <div class="convert-btn-container">
@@ -47,6 +58,8 @@
                 <%= convertedResult %> <%= toCurrency %>
               <% } else if (error) { %>
                 <%= error %>
+              <% } else { %>
+                Select currencies and enter amount, click button to convert.
               <% } %>
             <span id="converted-amount"></span> <span id="converted-currency"> </span>
           </p>

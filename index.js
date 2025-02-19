@@ -15,12 +15,13 @@ app.get('/', async (req, res) => {
   try {
     const result = await axios.get(API_URL + "currencies")
     currenciesList = Object.keys(result.data);
-    console.log(currenciesList);
 
     res.render("index.ejs", { 
       currency: currenciesList,
       convertedResult: null,
-      toCurrency: null,
+      amount: null,
+      fromCurrency: 'USD',
+      toCurrency: 'AUD',
       error: null  
     });
 
@@ -36,19 +37,37 @@ app.post("/convert", async (req, res) => {
   const toCurrency = response['to-currency'];
   const amount = Number(response['amount']);
 
-  const convertedResult = await convert(fromCurrency, toCurrency, amount);
-  
+  let convertedResult = await convert(fromCurrency, toCurrency, amount);
+
   if (convertedResult !== null) {
+    console.log(`From: ${fromCurrency}`);
+    console.log(`To: ${toCurrency}`);
+    console.log(`Amount: ${amount}`);
+    console.log(`Result: ${convertedResult}`);
+
+    if (convertedResult == 0.00) {
+      convertedResult = null;
+    }
+
     res.render("index.ejs", {
       convertedResult: convertedResult,
       currency: currenciesList,
       fromCurrency: fromCurrency,
       toCurrency: toCurrency,
+      amount: amount,
+      error: "Please enter an amount"
     });
+
   } else {
+
     res.render("index.ejs", {
-      error: "Error converting currency"
+      error: "Error converting currency",
+      currency: currenciesList,
+      convertedResult: null,
+      toCurrency: null,
+      amount: null
     })
+
   }
 
 });

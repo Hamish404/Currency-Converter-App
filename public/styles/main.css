@@ -58,7 +58,8 @@ body {
   padding: 4vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;   
+  justify-content: space-around;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);   
 }
 
 .title {
@@ -79,6 +80,25 @@ input, select {
   width: 100%;
   display: block;
   border: none;
+}
+
+label {
+  line-height: 1;
+}
+
+.swap-btn-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.swap-btn {
+  font-size: 4vh;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.swap-btn:hover {
+  transform: scale(1.15);
 }
 
 .convert-btn {

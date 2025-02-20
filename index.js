@@ -4,6 +4,8 @@ import axios from "axios";
 const app = express();
 const port = 3000;
 const API_URL = "https://api.frankfurter.dev/v1/";
+const defaultFrom = 'USD';
+const defaultTo = 'AUD';
 let currenciesList;
 
 app.use(express.json());
@@ -20,8 +22,8 @@ app.get('/', async (req, res) => {
       currency: currenciesList,
       convertedResult: null,
       amount: null,
-      fromCurrency: 'USD',
-      toCurrency: 'AUD',
+      fromCurrency: defaultFrom,
+      toCurrency: defaultTo,
       error: null  
     });
 
@@ -40,10 +42,6 @@ app.post("/convert", async (req, res) => {
   let convertedResult = await convert(fromCurrency, toCurrency, amount);
 
   if (convertedResult !== null) {
-    console.log(`From: ${fromCurrency}`);
-    console.log(`To: ${toCurrency}`);
-    console.log(`Amount: ${amount}`);
-    console.log(`Result: ${convertedResult}`);
 
     if (convertedResult == 0.00) {
       convertedResult = null;
@@ -64,6 +62,7 @@ app.post("/convert", async (req, res) => {
       error: "Error converting currency",
       currency: currenciesList,
       convertedResult: null,
+      fromCurrency: null,
       toCurrency: null,
       amount: null
     })
@@ -82,10 +81,19 @@ async function convert(from, to, amount) {
     const resp = await fetch(`https://api.frankfurter.dev/v1/latest?base=${from}&symbols=${to}`);
     const data = await resp.json();
     const convertedAmount = (amount * data.rates[to]).toFixed(2);
-    return convertedAmount;
+    const formattedConvertedAmount = formatNumber(convertedAmount);
+    return formattedConvertedAmount;
   } catch (error) {
     console.error("Error in convert:", error);
     return null;
+  }
+
+  function formatNumber(numberString) {
+    const [integerPart, decimalPart] = numberString.split('.');
+  
+    const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  
+    return decimalPart ? `${formattedIntegerPart}.${decimalPart}` : formattedIntegerPart;
   }
 
 }

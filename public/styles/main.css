@@ -1,6 +1,6 @@
 :root {
   --background: #ffffff;
-  --background-container: #F0EBEA;
+  --background-container: #f4b7ab;
   --app-background: whitesmoke;
   --app-title: #0063D9;
   --app-fields: hsl(300, 12%, 90%);
@@ -44,6 +44,7 @@ body {
 
 .wrapper {
   background-color: var(--background-container);
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
   height: 100%;
   width: 65%;
   display: grid;
@@ -59,7 +60,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);   
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);   
 }
 
 .title {
@@ -78,8 +79,11 @@ input, select {
   background-color: var(--app-fields);
   height: 5vh;
   width: 100%;
+  font-size: 1.8vh;
   display: block;
   border: none;
+  border-radius: 10px;
+  padding-left: 1vh;
 }
 
 label {
@@ -101,6 +105,10 @@ label {
   transform: scale(1.15);
 }
 
+.swap-btn:active {
+  transform: scale(1);
+}
+
 .convert-btn {
   width: 100%;
   aspect-ratio: 5.5/1;
@@ -117,15 +125,23 @@ label {
   transform: scale(1.05)
 }
 
+.convert-btn:active {
+  transform: scale(1);
+}
+
 h2 {
   font-weight: 400;
   font-size: 3vh;
 }
 
 .converted-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--app-fields);
-  height: 5vh;
-  width: 100%;
-  border: 2px solid var(--app-btn);
-  border-radius: 0.5vh;
+  aspect-ratio: 5.5/1;
+  font-size: 1.8vh;
+  padding: 1vh;
+  border: 3px solid var(--app-btn);
+  border-radius: 2vh;
 }

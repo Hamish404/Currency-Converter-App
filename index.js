@@ -6,7 +6,8 @@ const port = 3000;
 const API_URL = "https://api.frankfurter.dev/v1/";
 const defaultFrom = 'USD';
 const defaultTo = 'AUD';
-let currenciesList;
+let currenciesCode;
+let currenciesName;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,10 +17,12 @@ app.get('/', async (req, res) => {
   
   try {
     const result = await axios.get(API_URL + "currencies")
-    currenciesList = Object.keys(result.data);
+    currenciesCode = Object.keys(result.data);
+    currenciesName = Object.values(result.data);
 
     res.render("index.ejs", { 
-      currency: currenciesList,
+      currencyCode: currenciesCode,
+      currencyName: currenciesName,
       convertedResult: null,
       amount: null,
       fromCurrency: defaultFrom,
@@ -49,7 +52,8 @@ app.post("/convert", async (req, res) => {
 
     res.render("index.ejs", {
       convertedResult: convertedResult,
-      currency: currenciesList,
+      currencyCode: currenciesCode,
+      currencyName: currenciesName,
       fromCurrency: fromCurrency,
       toCurrency: toCurrency,
       amount: amount,
@@ -60,7 +64,8 @@ app.post("/convert", async (req, res) => {
 
     res.render("index.ejs", {
       error: "Error converting currency",
-      currency: currenciesList,
+      currencyCode: currenciesCode,
+      currencyName: currenciesName,
       convertedResult: null,
       fromCurrency: null,
       toCurrency: null,

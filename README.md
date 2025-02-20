@@ -25,11 +25,11 @@ This is a simple currency converter web application built using Node.js, Express
 
 ### Before Conversion (Desktop)
 
-![Before Conversion - Desktop](images/Currency-Converter-App-Before.png)
+![Before Conversion - Desktop](public/images/Currency-Converter-App-Before.png)
 
 ### After Conversion (Desktop)
 
-![After Conversion - Desktop](images/Currency-Converter-App-After.png)
+![After Conversion - Desktop](public/images/Currency-Converter-App-After.png)
 
 ## Getting Started
 

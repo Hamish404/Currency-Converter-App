@@ -194,8 +194,8 @@ h2 {
 /* xs */
 @media (max-width: 475px) {
   .app-container {
-    height: 70vh;
-    aspect-ratio: 6/16;
+    height: 80vh;
+    aspect-ratio: 7/16;
   }
 
   .title {
